@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Jurnal Anak Hebat</title>
+
+<style>
+body{
+    font-family: Arial;
+    background: linear-gradient(180deg,#a8e6ff,#ffffff);
+    margin:0;
+    padding:15px;
+}
+.container{
+    background:white;
+    border-radius:15px;
+    padding:15px;
+    box-shadow:0 4px 10px rgba(0,0,0,0.2);
+}
+h2{text-align:center;color:#ff7b00}
+input[type=text],input[type=time]{
+    width:100%;
+    padding:6px;
+    border-radius:6px;
+    border:1px solid #ccc;
+}
+table{width:100%;border-collapse:collapse;font-size:12px}
+th{background:#4fc3f7;color:white;padding:6px}
+td{border:1px solid #ddd;padding:5px;text-align:center}
+.print-btn{
+    margin-top:15px;
+    width:100%;
+    background:#ff9800;
+    color:white;
+    border:none;
+    padding:14px;
+    font-size:18px;
+    border-radius:12px;
+}
+#emoji{text-align:center;font-size:40px;margin:10px}
+.checklist label{display:block;font-size:11px}
+@media print{.print-btn{display:none}}
+</style>
+</head>
+
+<body>
+
+<div class="container">
+<h2>🌟 Jurnal Anak Hebat 🌟</h2>
+
+<div id="emoji">🙂</div>
+
+Nama : <input type="text"><br><br>
+Kelas : <input type="text"><br><br>
+
+<table>
+<tr>
+<th>Kegiatan</th>
+<th>Sen</th>
+<th>Sel</th>
+<th>Rab</th>
+<th>Kam</th>
+<th>Jum</th>
+<th>Sab</th>
+</tr>
+
+<tbody id="tbody"></tbody>
+</table>
+
+<button class="print-btn" onclick="window.print()">Cetak / Simpan PDF</button>
+</div>
+
+<script>
+
+const hari = 6;
+let html="";
+
+/* Bangun pagi (jam) */
+html+="<tr><td>Bangun Pagi (Jam)</td>";
+for(let i=0;i<hari;i++){
+html+="<td><input type='time'></td>";
+}
+html+="</tr>";
+
+/* Ibadah */
+html+="<tr><td>Beribadah</td>";
+for(let i=0;i<hari;i++){
+html+="<td class='checklist'>\
+<label><input type='checkbox' onchange='hitung()'> Subuh</label>\
+<label><input type='checkbox' onchange='hitung()'> Zuhur</label>\
+<label><input type='checkbox' onchange='hitung()'> Ashar</label>\
+<label><input type='checkbox' onchange='hitung()'> Magrib</label>\
+<label><input type='checkbox' onchange='hitung()'> Isya</label>\
+</td>";
+}
+html+="</tr>";
+
+/* kolom lain */
+const kegiatan=[
+"Olahraga",
+"Belajar",
+"Makan Sehat",
+"Perilaku Baik",
+"Istirahat"
+];
+
+kegiatan.forEach(k=>{
+html+="<tr><td>"+k+"</td>";
+for(let i=0;i<hari;i++){
+html+="<td><input type='text' placeholder='isi aktivitas'></td>";
+}
+html+="</tr>";
+});
+
+document.getElementById("tbody").innerHTML=html;
+
+function hitung(){
+let total=document.querySelectorAll(".checklist input").length;
+let checked=document.querySelectorAll(".checklist input:checked").length;
+let emoji="🙂";
+if(checked>total*0.75) emoji="🏆";
+else if(checked>total*0.5) emoji="😄";
+else if(checked>total*0.25) emoji="😊";
+document.getElementById("emoji").innerHTML=emoji;
+}
+
+</script>
+
+</body>
+</html>
