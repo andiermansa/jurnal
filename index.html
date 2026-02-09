@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>7 Kebiasaan Anak Hebat</title>
+
+<style>
+body{
+    margin:0;
+    font-family:Arial;
+    background:linear-gradient(180deg,#6ec6ff,#ffffff);
+    text-align:center;
+}
+
+/* animasi mengambang */
+@keyframes float{
+    0%{transform:translateY(0)}
+    50%{transform:translateY(-10px)}
+    100%{transform:translateY(0)}
+}
+
+.container{
+    padding:20px;
+}
+
+h1{
+    color:#ff7b00;
+}
+
+/* icon box */
+.icons{
+    display:grid;
+    grid-template-columns:repeat(2,1fr);
+    gap:15px;
+    margin-top:20px;
+}
+
+.icon{
+    background:white;
+    padding:20px;
+    border-radius:15px;
+    box-shadow:0 4px 10px rgba(0,0,0,0.2);
+    animation:float 3s ease-in-out infinite;
+    transition:0.3s;
+    font-size:40px;
+}
+
+.icon:hover{
+    transform:scale(1.15);
+    background:#fff3e0;
+}
+
+.label{
+    font-size:14px;
+    margin-top:5px;
+}
+
+/* tombol masuk */
+.btn{
+    margin-top:30px;
+    display:inline-block;
+    padding:15px 40px;
+    font-size:20px;
+    background:#ff9800;
+    color:white;
+    text-decoration:none;
+    border-radius:15px;
+    box-shadow:0 4px 10px rgba(0,0,0,0.2);
+}
+.btn:hover{
+    background:#fb8c00;
+}
+</style>
+</head>
+
+<body>
+
+<div class="container">
+
+<h1>🌟 7 Kebiasaan Anak Hebat 🌟</h1>
+
+<div class="icons">
+
+<div class="icon">⏰<div class="label">Bangun Pagi</div></div>
+<div class="icon">🕌<div class="label">Beribadah</div></div>
+<div class="icon">🏃<div class="label">Olahraga</div></div>
+<div class="icon">📚<div class="label">Gemar Belajar</div></div>
+<div class="icon">🥗<div class="label">Makan Sehat</div></div>
+<div class="icon">🤝<div class="label">Perilaku Baik</div></div>
+<div class="icon">😴<div class="label">Istirahat Cukup</div></div>
+
+</div>
+
+<a class="btn" href="index.html">Masuk Isi Jurnal</a>
+
+</div>
+
+</body>
+</html>
