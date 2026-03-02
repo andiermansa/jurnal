@@ -1,9 +1,10 @@
+
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Jurnal Anak Hebat</title>
+<title>Jurnal Harian Anak Hebat</title>
 
 <style>
 body{
@@ -15,116 +16,130 @@ body{
 .container{
     background:white;
     border-radius:15px;
-    padding:15px;
-    box-shadow:0 4px 10px rgba(0,0,0,0.2);
+    padding:20px;
+    box-shadow:0 4px 12px rgba(0,0,0,0.2);
 }
-h2{text-align:center;color:#ff7b00}
-input[type=text],input[type=time]{
+h2{
+    text-align:center;
+    color:#ff7b00;
+}
+input, select{
     width:100%;
-    padding:6px;
-    border-radius:6px;
+    padding:8px;
+    border-radius:8px;
     border:1px solid #ccc;
+    margin-bottom:10px;
 }
-table{width:100%;border-collapse:collapse;font-size:12px}
-th{background:#4fc3f7;color:white;padding:6px}
-td{border:1px solid #ddd;padding:5px;text-align:center}
-.print-btn{
+.section{
     margin-top:15px;
+    padding:10px;
+    background:#f9f9f9;
+    border-radius:10px;
+}
+label{
+    display:block;
+    margin:5px 0;
+}
+#emoji{
+    text-align:center;
+    font-size:50px;
+    margin:10px 0;
+}
+button{
     width:100%;
+    padding:14px;
+    border:none;
+    border-radius:12px;
+    font-size:16px;
+    margin-top:10px;
+}
+.print-btn{
     background:#ff9800;
     color:white;
-    border:none;
-    padding:14px;
-    font-size:18px;
-    border-radius:12px;
 }
-#emoji{text-align:center;font-size:40px;margin:10px}
-.checklist label{display:block;font-size:11px}
-@media print{.print-btn{display:none}}
+.save-btn{
+    background:#4caf50;
+    color:white;
+}
+@media print{
+    button{display:none}
+}
 </style>
 </head>
 
 <body>
 
 <div class="container">
-<h2>🌟 Jurnal Anak Hebat 🌟</h2>
+
+<h2>🌟 Jurnal Harian Anak Hebat 🌟</h2>
 
 <div id="emoji">🙂</div>
 
-Nama : <input type="text"><br><br>
-Kelas : <input type="text"><br><br>
+Tanggal:
+<input type="date">
 
-<table>
-<tr>
-<th>Kegiatan</th>
-<th>Sen</th>
-<th>Sel</th>
-<th>Rab</th>
-<th>Kam</th>
-<th>Jum</th>
-<th>Sab</th>
-</tr>
+Nama:
+<input type="text">
 
-<tbody id="tbody"></tbody>
-</table>
+Kelas:
+<input type="text">
 
+<div class="section">
+<b>Bangun Pagi</b>
+<input type="time">
+</div>
+
+<div class="section">
+<b>Ibadah Hari Ini</b>
+<label><input type="checkbox" onchange="hitung()"> Subuh</label>
+<label><input type="checkbox" onchange="hitung()"> Zuhur</label>
+<label><input type="checkbox" onchange="hitung()"> Ashar</label>
+<label><input type="checkbox" onchange="hitung()"> Magrib</label>
+<label><input type="checkbox" onchange="hitung()"> Isya</label>
+</div>
+
+<div class="section">
+<b>Olahraga</b>
+<input type="text" placeholder="Apa olahraga hari ini?">
+</div>
+
+<div class="section">
+<b>Belajar</b>
+<input type="text" placeholder="Belajar apa hari ini?">
+</div>
+
+<div class="section">
+<b>Makan Sehat</b>
+<input type="text" placeholder="Makan apa hari ini?">
+</div>
+
+<div class="section">
+<b>Perilaku Baik Hari Ini</b>
+<input type="text" placeholder="Contoh: membantu orang tua">
+</div>
+
+<div class="section">
+<b>Jam Tidur</b>
+<input type="time">
+</div>
+
+<button class="save-btn">Simpan</button>
 <button class="print-btn" onclick="window.print()">Cetak / Simpan PDF</button>
+
 </div>
 
 <script>
-
-const hari = 6;
-let html="";
-
-/* Bangun pagi (jam) */
-html+="<tr><td>Bangun Pagi (Jam)</td>";
-for(let i=0;i<hari;i++){
-html+="<td><input type='time'></td>";
-}
-html+="</tr>";
-
-/* Ibadah */
-html+="<tr><td>Beribadah</td>";
-for(let i=0;i<hari;i++){
-html+="<td class='checklist'>\
-<label><input type='checkbox' onchange='hitung()'> Subuh</label>\
-<label><input type='checkbox' onchange='hitung()'> Zuhur</label>\
-<label><input type='checkbox' onchange='hitung()'> Ashar</label>\
-<label><input type='checkbox' onchange='hitung()'> Magrib</label>\
-<label><input type='checkbox' onchange='hitung()'> Isya</label>\
-</td>";
-}
-html+="</tr>";
-
-/* kolom lain */
-const kegiatan=[
-"Olahraga",
-"Belajar",
-"Makan Sehat",
-"Perilaku Baik",
-"Istirahat"
-];
-
-kegiatan.forEach(k=>{
-html+="<tr><td>"+k+"</td>";
-for(let i=0;i<hari;i++){
-html+="<td><input type='text' placeholder='isi aktivitas'></td>";
-}
-html+="</tr>";
-});
-
-document.getElementById("tbody").innerHTML=html;
-
 function hitung(){
-let total=document.querySelectorAll(".checklist input").length;
-let checked=document.querySelectorAll(".checklist input:checked").length;
+let total=document.querySelectorAll("input[type=checkbox]").length;
+let checked=document.querySelectorAll("input[type=checkbox]:checked").length;
 let emoji="🙂";
-if(checked>total*0.75) emoji="🏆";
-else if(checked>total*0.5) emoji="😄";
-else if(checked>total*0.25) emoji="😊";
+
+if(checked>=5) emoji="🏆";
+else if(checked>=3) emoji="😄";
+else if(checked>=1) emoji="😊";
+
 document.getElementById("emoji").innerHTML=emoji;
 }
-
 </script>
 
 </body>
